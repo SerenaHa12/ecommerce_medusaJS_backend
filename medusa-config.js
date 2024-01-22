@@ -23,13 +23,19 @@ try {
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
-  process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
+  process.env.ADMIN_CORS ||
+  "http://localhost:7000,http://localhost:7001" ||
+  "https://admin-ecm.5labs.io";
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
+const STORE_CORS =
+  process.env.STORE_CORS ||
+  "http://localhost:8000" ||
+  "https://ecm.5labs.io" ||
+  "https://staging.5labs.io";
 
 const DATABASE_URL =
-  process.env.DATABASE_URL || "postgres://postgres:123@localhost/shop_db";
+  process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
@@ -49,6 +55,7 @@ const plugins = [
       autoRebuild: true,
       develop: {
         open: process.env.OPEN_BROWSER !== "false",
+        allowedHosts: ["admin-ecm.5labs.io"],
       },
     },
   },
